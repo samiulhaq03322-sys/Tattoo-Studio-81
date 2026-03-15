@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tattoo Studio 81 | Modern Ink & Neon Art</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --neon-red: #ff003c;
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --text-gray: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--neon-red); border-radius: 10px; }
+
+        /* --- Global Neon Effects --- */
+        .neon-text-red { text-shadow: 0 0 10px var(--neon-red), 0 0 20px var(--neon-red); color: #fff; }
+        .neon-text-blue { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); color: #fff; }
+        
+        .btn-neon-red {
+            background: transparent;
+            border: 2px solid var(--neon-red);
+            color: var(--neon-red);
+            box-shadow: 0 0 10px var(--neon-red);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .btn-neon-red:hover {
+            background: var(--neon-red);
+            color: #fff;
+            box-shadow: 0 0 30px var(--neon-red);
+        }
+
+        .btn-neon-blue {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .btn-neon-blue:hover {
+            background: var(--neon-blue);
+            color: #fff;
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #333;
+            transition: 0.4s;
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: var(--neon-red) !important;
+            text-shadow: 0 0 5px var(--neon-red);
+        }
+        .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: 0.3s;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: var(--neon-blue) !important;
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        /* --- Hero Section & Carousel --- */
+        .hero-carousel .carousel-item {
+            height: 90vh;
+            min-height: 600px;
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel-caption {
+            bottom: 25%;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--neon-red);
+        }
+        .hero-title {
+            font-size: 5rem;
+            animation: neonPulse 2s infinite alternate;
+        }
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 10px var(--neon-red), 0 0 20px var(--neon-red); }
+            to { text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--neon-red), 0 0 60px var(--neon-red); }
+        }
+
+        /* --- Page Content Management --- */
+        .page-view {
+            display: none;
+            padding-top: 60px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+        }
+        .page-view.active {
+            display: block;
+        }
+
+        /* --- Section Styling --- */
+        .section-header {
+            margin-bottom: 60px;
+        }
+        .info-block {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #222;
+            height: 100%;
+            transition: 0.3s;
+        }
+        .info-block:hover {
+            border-color: var(--neon-purple);
+        }
+
+        /* --- Cards & Grid --- */
+        .artist-card, .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid #333;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            height: 100%;
+        }
+        .artist-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+        }
+        .pricing-card:hover {
+            border-color: var(--neon-red);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
+        }
+
+        /* --- Gallery --- */
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 350px;
+            margin-bottom: 20px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.7);
+        }
+        .gallery-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            background: rgba(0,0,0,0.7);
+            transition: 0.3s;
+            color: var(--neon-blue);
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* --- Form Styling --- */
+        .form-control, .form-select {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 12px;
+        }
+        .form-control:focus {
+            background-color: #222;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            color: #fff;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #050505;
+            padding: 80px 0 30px;
+            border-top: 1px solid #222;
+        }
+
+        /* --- Lightbox --- */
+        #lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 85%;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+            .carousel-caption { bottom: 10%; padding: 15px; }
+            .hero-carousel .carousel-item { height: 70vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showPage('home')">TATTOO STUDIO 81</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('home')">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('about')">ABOUT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('gallery')">GALLERY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('artists')">ARTISTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('pricing')">PRICING</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('booking')">BOOKING</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('contact')">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="page-view active">
+            <!-- Hero Carousel -->
+            <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=2000');">
+                        <div class="carousel-caption text-start">
+                            <h1 class="hero-title">PRECISION INK</h1>
+                            <p class="lead">Where world-class artistry meets clinical safety. Studio 81 is the apex of modern tattooing.</p>
+                            <button class="btn btn-neon-red btn-lg mt-3" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1560707303-4e980ce876ad?q=80&w=2000');">
+                        <div class="carousel-caption text-start">
+                            <h1 class="hero-title neon-text-blue" style="text-shadow: 0 0 10px var(--neon-blue);">CUSTOM ART</h1>
+                            <p class="lead">Don't settle for a stencil. Our artists specialize in bespoke, custom-designed masterpieces unique to you.</p>
+                            <button class="btn btn-neon-blue btn-lg mt-3" onclick="showPage('gallery')">View Works</button>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=2000');">
+                        <div class="carousel-caption text-start">
+                            <h1 class="hero-title">NEON VIBES</h1>
+                            <p class="lead">Experience the most immersive studio environment in the city. High energy, high art, high standards.</p>
+                            <button class="btn btn-neon-red btn-lg mt-3" onclick="showPage('artists')">Meet Artists</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+
+            <div class="container my-5 py-5">
+                <div class="row align-items-center mb-5">
+                    <div class="col-md-6 mb-4 animate__animated animate__fadeInLeft">
+                        <h2 class="neon-text-blue mb-4">The Studio 81 Experience</h2>
+                        <p class="text-gray lead">Founded in a neon-drenched basement and grown into a multi-city phenomenon, Studio 81 represents the evolution of the tattoo industry.</p>
+                        <p class="text-gray">We believe that a tattoo is more than just ink; it's a milestone, a memory, and a piece of wearable fine art. Our facility features state-of-the-art sterilization equipment, hospital-grade hygiene protocols, and an atmosphere designed to put your mind at ease while your skin becomes a canvas.</p>
+                        <div class="row mt-4">
+                            <div class="col-6 mb-3">
+                                <h4 class="text-white"><i class="fas fa-certificate text-danger me-2"></i>Certified</h4>
+                                <p class="small text-secondary">Fully licensed health-department approved facility.</p>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h4 class="text-white"><i class="fas fa-vial text-info me-2"></i>Vegan Ink</h4>
+                                <p class="small text-secondary">Premium, ethically sourced, and organic pigments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 animate__animated animate__fadeInRight">
+                        <div class="info-block border-info">
+                            <h3 class="mb-4 text-info">Why Choose Us?</h3>
+                            <ul class="list-unstyled">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle mt-1 me-3 text-info"></i>
+                                    <span><strong>Expert Consultations:</strong> We spend hours refining your design before the needle ever touches your skin.</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle mt-1 me-3 text-info"></i>
+                                    <span><strong>Aftercare Excellence:</strong> We provide 24/7 digital support for your healing process.</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle mt-1 me-3 text-info"></i>
+                                    <span><strong>Global Talent:</strong> Our resident artists come from 5 different continents with diverse stylistic backgrounds.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page-view">
+            <div class="container">
+                <div class="text-center section-header">
+                    <h2 class="neon-text-red display-4">THE LEGACY OF 81</h2>
+                    <p class="text-gray">Four decades of breaking boundaries in the tattoo world.</p>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-6">
+                        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800" class="img-fluid rounded-3 mb-4 shadow-lg border border-secondary" alt="Interior">
+                        <div class="p-4 bg-card rounded shadow">
+                            <h4 class="text-danger">Our Standards</h4>
+                            <p class="text-gray">Every artist at Studio 81 undergoes rigorous bloodborne pathogen training annually. We use single-use needles and specialized protective barriers for all equipment to ensure the highest safety standards in the industry.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 class="text-white mb-3">Founded in Rebellion</h3>
+                        <p class="text-gray">In 1981, tattooing was a misunderstood art form. Our founder, Arthur "Eight-One" Vance, opened the first studio with a simple vision: treat tattoos like fine art in a gallery. This revolutionary approach changed how the city viewed body art forever.</p>
+                        <p class="text-gray">Today, we carry that torch by blending traditional techniques with modern technology. From 3D-mapped designs to thermal stencil printing, we use every tool available to ensure precision.</p>
+                        
+                        <div class="row g-3 mt-4">
+                            <div class="col-md-6">
+                                <div class="info-block p-3">
+                                    <h5 class="text-info"><i class="fas fa-eye me-2"></i>Vision</h5>
+                                    <p class="small text-secondary">To lead the global tattoo culture toward a future of artistic innovation and absolute safety.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-block p-3">
+                                    <h5 class="text-danger"><i class="fas fa-heart me-2"></i>Passion</h5>
+                                    <p class="small text-secondary">We don't just "do tattoos." We collaborate with humans to externalize their internal identities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Page -->
+        <section id="gallery" class="page-view">
+            <div class="container">
+                <div class="text-center section-header">
+                    <h2 class="neon-text-blue display-4">THE EXHIBITION</h2>
+                    <p class="text-gray">Explore our portfolio across various disciplines.</p>
+                </div>
+                
+                <div class="row" id="gallery-grid">
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1550537687-c91072c4792d?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1550537687-c91072c4792d?q=80&w=800" alt="Blackwork">
+                            <div class="gallery-overlay">
+                                <h5>Blackwork Abstract</h5>
+                                <span class="badge bg-info">Artist: Jax Thorne</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=800" alt="Realism">
+                            <div class="gallery-overlay">
+                                <h5>Hyper-Realism Portrait</h5>
+                                <span class="badge bg-danger">Artist: Jax Thorne</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1597852074816-d933c4d2b988?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1597852074816-d933c4d2b988?q=80&w=800" alt="Traditional">
+                            <div class="gallery-overlay">
+                                <h5>Old School Trad</h5>
+                                <span class="badge bg-info">Artist: Mara Black</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1542332606-b3d2703867f1?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1542332606-b3d2703867f1?q=80&w=800" alt="Japanese">
+                            <div class="gallery-overlay">
+                                <h5>Irezumi Inspired</h5>
+                                <span class="badge bg-danger">Artist: Luna Vane</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1562967914-01eba72aa174?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1562967914-01eba72aa174?q=80&w=800" alt="Minimal">
+                            <div class="gallery-overlay">
+                                <h5>Fine Line Geometry</h5>
+                                <span class="badge bg-info">Artist: Luna Vane</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?q=80&w=1200')">
+                            <img src="https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?q=80&w=800" alt="Portrait">
+                            <div class="gallery-overlay">
+                                <h5>Neo-Traditional Color</h5>
+                                <span class="badge bg-danger">Artist: Mara Black</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Expanded Service Info -->
+                <div class="mt-5 p-5 bg-card border border-secondary rounded">
+                    <h3 class="neon-text-blue mb-4">Our Specialties</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>COVER-UPS</h6>
+                            <p class="small text-secondary">Expertly hiding old mistakes with complex layering and smart design placement.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>SCAR CAMOUFLAGE</h6>
+                            <p class="small text-secondary">Sensitive and professional artistic integration for surgical or injury scars.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>RESTORATION</h6>
+                            <p class="small text-secondary">Revitalizing faded ink from decades past with modern pigments and sharper lines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artists Page -->
+        <section id="artists" class="page-view">
+            <div class="container">
+                <div class="text-center section-header">
+                    <h2 class="neon-text-red display-4">THE ELITE TEAM</h2>
+                    <p class="text-gray">Meet the multi-award-winning artists who define our studio's edge.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="artist-card text-center p-4">
+                            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400" class="img-fluid rounded-circle mb-4 border border-4 border-danger p-1" style="width: 200px; height: 200px; object-fit: cover;" alt="Artist 1">
+                            <h3 class="mb-2">Jax Thorne</h3>
+                            <h6 class="text-info mb-3">Resident Master / 15 Years Exp.</h6>
+                            <p class="text-gray small px-3">Specializing in hyper-realism and dark surrealism. Jax has won 'Artist of the Year' at the International Tattoo Convention twice. His waitlist is usually 3-4 months.</p>
+                            <div class="socials py-3">
+                                <a href="#" class="btn btn-sm btn-outline-danger mx-1"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="btn btn-sm btn-outline-danger mx-1"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="artist-card text-center p-4">
+                            <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=400" class="img-fluid rounded-circle mb-4 border border-4 border-info p-1" style="width: 200px; height: 200px; object-fit: cover;" alt="Artist 2">
+                            <h3 class="mb-2">Luna Vane</h3>
+                            <h6 class="text-info mb-3">Fine Line Specialist / 8 Years Exp.</h6>
+                            <p class="text-gray small px-3">Luna brings a delicate touch to the studio. Known for her micro-realism and geometric patterns that flow naturally with the body's anatomy.</p>
+                            <div class="socials py-3">
+                                <a href="#" class="btn btn-sm btn-outline-info mx-1"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="btn btn-sm btn-outline-info mx-1"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="artist-card text-center p-4">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400" class="img-fluid rounded-circle mb-4 border border-4 border-primary p-1" style="width: 200px; height: 200px; object-fit: cover;" alt="Artist 3">
+                            <h3 class="mb-2">Mara Black</h3>
+                            <h6 class="text-info mb-3">Neo-Trad Guru / 10 Years Exp.</h6>
+                            <p class="text-gray small px-3">Bold lines and vibrant colors define Mara's work. She blends classic sailor motifs with modern pop-culture aesthetics for a truly unique look.</p>
+                            <div class="socials py-3">
+                                <a href="#" class="btn btn-sm btn-outline-primary mx-1"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="btn btn-sm btn-outline-primary mx-1"><i class="fab fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Page -->
+        <section id="pricing" class="page-view">
+            <div class="container">
+                <div class="text-center section-header">
+                    <h2 class="neon-text-blue display-4">INVESTMENT</h2>
+                    <p class="text-gray">Quality art is an investment. Here is our baseline pricing guide.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="pricing-card p-4 text-center">
+                            <h3>FLASH SESSIONS</h3>
+                            <div class="display-6 my-3 neon-text-red">$120 - $250</div>
+                            <p class="text-info small">PRE-MADE ART</p>
+                            <ul class="list-unstyled text-gray mb-4 text-start">
+                                <li><i class="fas fa-check me-2 text-danger"></i> Choose from our flash book</li>
+                                <li><i class="fas fa-check me-2 text-danger"></i> Size up to 3x3 inches</li>
+                                <li><i class="fas fa-check me-2 text-danger"></i> No design changes allowed</li>
+                                <li><i class="fas fa-check me-2 text-danger"></i> Single session complete</li>
+                            </ul>
+                            <button class="btn btn-neon-red w-100" onclick="showPage('booking')">SECURE SLOT</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pricing-card p-4 text-center border-info shadow-lg">
+                            <h3>CUSTOM PROJECT</h3>
+                            <div class="display-6 my-3 neon-text-blue">$200 / HR</div>
+                            <p class="text-info small">BESPOKE ARTISTRY</p>
+                            <ul class="list-unstyled text-gray mb-4 text-start">
+                                <li><i class="fas fa-check me-2 text-info"></i> Full custom design process</li>
+                                <li><i class="fas fa-check me-2 text-info"></i> Includes 2 revision rounds</li>
+                                <li><i class="fas fa-check me-2 text-info"></i> Medium to Large scale</li>
+                                <li><i class="fas fa-check me-2 text-info"></i> Priority scheduling</li>
+                            </ul>
+                            <button class="btn btn-neon-blue w-100" onclick="showPage('booking')">SECURE SLOT</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="pricing-card p-4 text-center">
+                            <h3>MASTER SESSION</h3>
+                            <div class="display-6 my-3 neon-text-red">$1,200+</div>
+                            <p class="text-info small">FULL DAY SESSIONS</p>
+                            <ul class="list-unstyled text-gray mb-4 text-start">
+                                <li><i class="fas fa-check me-2 text-danger"></i> 6-8 hours of work time</li>
+                                <li><i class="fas fa-check me-2 text-danger"></i> Lunch and snacks provided</li>
+                                <li><i class="fas fa-check me-2 text-danger"></i> Premium aftercare kit</li>
+                                <li><i class="fas fa-check me-2 text-danger"></i> Guaranteed back-to-back dates</li>
+                            </ul>
+                            <button class="btn btn-neon-red w-100" onclick="showPage('booking')">SECURE SLOT</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-dark mt-5 border-info text-center">
+                    <p class="mb-0"><i class="fas fa-info-circle me-2 text-info"></i> A <strong>$50 non-refundable deposit</strong> is required to secure any booking. This goes toward the final price of your tattoo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Page -->
+        <section id="booking" class="page-view">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="row bg-card rounded-4 overflow-hidden shadow-lg border border-secondary">
+                            <div class="col-md-5 p-5 bg-dark d-flex flex-column justify-content-center border-end border-secondary">
+                                <h2 class="neon-text-blue mb-4">READY FOR INK?</h2>
+                                <p class="text-gray">Fill out the form with as much detail as possible. Our studio manager will reach out within 48 hours to discuss your project and schedule your consultation.</p>
+                                <hr class="border-secondary my-4">
+                                <ul class="list-unstyled text-secondary small">
+                                    <li class="mb-2"><i class="fas fa-clock me-2"></i> Typical response: 24-48 Hours</li>
+                                    <li class="mb-2"><i class="fas fa-calendar me-2"></i> Bookings open 3 months in advance</li>
+                                    <li class="mb-2"><i class="fas fa-user-shield me-2"></i> Must be 18+ with valid ID</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-7 p-5">
+                                <form id="bookingForm" onsubmit="handleFormSubmit(event)">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" placeholder="John Doe" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" placeholder="name@email.com" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Tattoo Style</label>
+                                            <select class="form-select">
+                                                <option>Realism</option>
+                                                <option>Traditional</option>
+                                                <option>Blackwork</option>
+                                                <option>Minimalist</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Artist Preference</label>
+                                            <select class="form-select">
+                                                <option>No Preference / First Available</option>
+                                                <option>Jax Thorne</option>
+                                                <option>Luna Vane</option>
+                                                <option>Mara Black</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Placement & Size (e.g., Forearm, 5x5 inches)</label>
+                                        <input type="text" class="form-control" placeholder="Describe the location and dimensions" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Project Details</label>
+                                        <textarea class="form-control" rows="4" placeholder="Describe your vision, symbols, and elements..."></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-neon-blue w-100 py-3 mt-3 shadow">SUBMIT APPLICATION</button>
+                                </form>
+                                <div id="formFeedback" class="mt-3 text-center d-none animate__animated animate__pulse">
+                                    <h4 class="text-info"><i class="fas fa-paper-plane me-2"></i> SENT!</h4>
+                                    <p class="text-secondary">We'll be in touch soon. Stay tuned to your email.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page-view">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-md-5">
+                        <h2 class="neon-text-red mb-4">LOCATION & ACCESS</h2>
+                        <div class="info-block mb-4 border-danger">
+                            <ul class="list-unstyled text-gray fs-5">
+                                <li class="mb-4 d-flex">
+                                    <i class="fas fa-map-marker-alt mt-1 me-3 text-danger"></i>
+                                    <div>
+                                        <strong>The Neon District</strong><br>
+                                        <span class="small">81 Cyber Blvd, Floor 4<br>Night City, NC 90210</span>
+                                    </div>
+                                </li>
+                                <li class="mb-4 d-flex">
+                                    <i class="fas fa-phone mt-1 me-3 text-danger"></i>
+                                    <div>
+                                        <strong>Direct Line</strong><br>
+                                        <span class="small">(555) 012-3456</span>
+                                    </div>
+                                </li>
+                                <li class="mb-4 d-flex">
+                                    <i class="fas fa-envelope mt-1 me-3 text-danger"></i>
+                                    <div>
+                                        <strong>Studio Support</strong><br>
+                                        <span class="small">booking@studio81.com</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="rounded overflow-hidden border border-secondary">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8354345093747!2d-122.4194155!3d37.7749295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1625000000000!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="bg-card p-5 rounded-4 border border-secondary h-100">
+                            <h4 class="mb-4 text-white">Guest Inquiry</h4>
+                            <p class="text-gray mb-4">For general questions regarding guest artists, sponsorships, or studio rentals, use the form below.</p>
+                            <form>
+                                <div class="mb-3"><input type="text" class="form-control" placeholder="Full Name"></div>
+                                <div class="mb-3"><input type="email" class="form-control" placeholder="Email Address"></div>
+                                <div class="mb-3">
+                                    <select class="form-select">
+                                        <option>Subject: Guest Spot Inquiry</option>
+                                        <option>Subject: Press / Media</option>
+                                        <option>Subject: General Question</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4"><textarea class="form-control" rows="6" placeholder="Your Message"></textarea></div>
+                                <button type="button" class="btn btn-neon-red w-100 py-3">SEND DISPATCH</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Zoomed Ink">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-4 mb-4">
+                    <h3 class="neon-text-red mb-3">STUDIO 81</h3>
+                    <p class="text-secondary small">Leading the tattoo industry since 1981 through artistic excellence, medical-grade safety, and a relentless pursuit of the avant-garde.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="text-white mb-3">Explore</h5>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" onclick="showPage('gallery')" class="text-secondary text-decoration-none">Portfolio</a></li>
+                        <li><a href="#" onclick="showPage('artists')" class="text-secondary text-decoration-none">Artists</a></li>
+                        <li><a href="#" onclick="showPage('booking')" class="text-secondary text-decoration-none">Booking</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-white mb-3">Newsletter</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-sm bg-dark border-secondary text-white" placeholder="Email">
+                        <button class="btn btn-danger btn-sm">Join</button>
+                    </div>
+                </div>
+                <div class="col-md-3 text-md-end">
+                    <h5 class="text-white mb-3">Connect</h5>
+                    <div class="fs-4">
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="text-center pt-3">
+                <p class="text-secondary extra-small">&copy; 2024 Tattoo Studio 81. All Rights Reserved. Stay Inked. Stay Gold.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Multi-page Simulation Logic
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.classList.remove('active');
+                page.classList.remove('animate__animated', 'animate__fadeIn');
+            });
+
+            // Show selected page
+            const activePage = document.getElementById(pageId);
+            activePage.classList.add('active');
+            activePage.classList.add('animate__animated', 'animate__fadeIn');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            // Close mobile menu if open
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse.classList.contains('show')) {
+                navbarToggler.click();
+            }
+
+            // Update URL hash
+            window.location.hash = pageId;
+        }
+
+        // Lightbox Functions
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Form Submission Simulation
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const feedback = document.getElementById('formFeedback');
+            
+            form.classList.add('d-none');
+            feedback.classList.remove('d-none');
+            
+            setTimeout(() => {
+                feedback.classList.add('d-none');
+                form.classList.remove('d-none');
+                form.reset();
+            }, 5000);
+        }
+
+        // Handle URL Hash on Load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
+
+        // Navbar Scroll Effect
+        window.onscroll = function() {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                nav.style.backgroundColor = 'rgba(5, 5, 5, 0.98)';
+                nav.style.padding = '5px 0';
+            } else {
+                nav.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                nav.style.padding = '15px 0';
+            }
+        };
+    </script>
+</body>
+</html>
